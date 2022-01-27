@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div>
+    <h1>Wine-o-meter** is a future unicorn application.</h1>
+    <h2>It allows wine producers to predict the quality score of their wine based on physicochemical inputs.</h2>
+    <h2>The startup behind this innovation is convinced about its ability to disrupt the world of wine. 🍷</h2>
+  </div>
+  <div>
+    <h1>API Endpoints</h1>
+    <h2>POST /predict</h2>
+    <h3>Example of request in shell</h3>
+      <h4>Simple input</h4>
+      <pre>
+      curl -i -H "Content-Type: application/json" -X POST -d &#92;
+                '{"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]}' &#92;
+                  https://prjapi.herokuapp.com/predict
+
+      response is : { "predict": "[6]" }
+    </pre>
+    <h4>Multiple inputs</h4>
+    <pre>
+    curl -i -H "Content-Type: application/json" -X POST -d &#92;
+                '{"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8],[5.0, 0.98, 0.32, 18.9, 0.050, 75.0, 122.0, 0.401, 3.1, 0.21, 1.2]]}' &#92;
+                  https://prjapi.herokuapp.com/predict
+
+    response is : { "predict": "[6 5]" }
+    </pre>
+    <h3> Example in python</h3>
+      <h4>
+        <pre>
+        import requests
+        response = requests.post("https://prjapi.herokuapp.com/predict", json={
+            "input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]
+        })
+        print(response.json())
+
+        {'predict': '[6]'}
+        </pre>
+      </h4>
+  </div>
+{% endblock %}
